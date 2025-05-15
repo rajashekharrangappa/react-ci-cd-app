@@ -1,18 +1,21 @@
 name: Deploy to GitHub Pages
 on:
   push:
-    branches: [ master ]
-permissions:
-  contents: write  # Needed to push to gh-pages branch
-  pages: write     # Needed for GitHub Pages
-  id-token: write  # Needed for GitHub Pages
+    branches: [ main ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Set Git identity (critical fix)
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - run: npm install
       - run: npm run build
       - run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Use PAT instead of default token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
