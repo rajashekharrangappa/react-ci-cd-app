@@ -2,17 +2,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ master ]
+permissions:
+  contents: write  # Needed to push to gh-pages branch
+  pages: write     # Needed for GitHub Pages
+  id-token: write  # Needed for GitHub Pages
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configure Git
-        run: |
-          git config --global user.name "Rajashekhar Rangappa"
-          git config --global user.email "rajashekhar.hr@gmail.com"
       - run: npm install
       - run: npm run build
       - run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Use PAT instead of default token
