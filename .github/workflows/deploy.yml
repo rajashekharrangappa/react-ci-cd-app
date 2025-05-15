@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Configure Git
         run: |
-          git config --global user.name "rajashekharrangappa"
+          git config --global user.name "Rajashekhar Rangappa"
           git config --global user.email "rajashekhar.hr@gmail.com"
       - run: npm install
       - run: npm run build
