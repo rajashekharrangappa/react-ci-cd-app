@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Configure Git
+        run: |
+          git config --global user.name "rajashekharrangappa"
+          git config --global user.email "rajashekhar.hr@gmail.com"
       - run: npm install
       - run: npm run build
       - run: npm run deploy
